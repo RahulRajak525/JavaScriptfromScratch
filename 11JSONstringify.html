@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style> 
+    .container{
+        display: block;
+        width: 500px;
+        background: rgb(134, 128, 128);
+    }
+    #userlist{
+      color: white;
+    }
+         
+    label{
+        font-size: 20px;
+        margin-left:5px;
+    }
+    .btn{
+        background-color: rgb(68, 64, 64);
+        margin-left: 5px;
+        width:75px ;
+        height: 30px;
+        border-radius: 5px;
+        color: white;
+    }
+    .btn:hover{
+        background : #444;
+        width: 78px;
+        height:35px ;
+        font-size: 15px;
+    }
+    #name ,#email {
+        width: 97%;
+        margin-left: 5px;
+    }
+    ul{
+        padding-bottom:5px;
+    }
+</style>
+<body>
+    <section class="container">
+        <form action="" id="my-form">
+            <h1>Add User</h1>
+            <div class="msg"></div>
+            <div>
+                <label for="name "> Name:</label><br>
+                <input type="text" name="" id="name">
+            </div>
+            <div>
+                <label for="">Email:</label><br>
+                <input type="text" name="" id="email" ><br>
+            </div>
+            <input type="submit"  class="btn" value="submit" style="margin-top:5px" >
+           <div> <ul id="userlist"></ul></div> 
+        </form>
+       
+    </section>
+    
+    <script>
+       const form = document.querySelector('#my-form');
+       const nameInput = document.querySelector('#name')
+       const emailInput = document.querySelector('#email')
+       const msg = document.querySelector('.msg')
+       const uselist = document.querySelector('#user')
+       form.addEventListener('submit', onsubmit);
+        function onsubmit(e){
+           e.preventDefault();
+           if(nameInput.value===''||emailInput.value===''){
+             msg.innerHTML = 'All fields are mandatory';
+             setTimeout(() => msg.remove(),3000 );
+           }
+           else{
+            var li = document.createElement('li');
+            li.appendChild(document.createTextNode(
+                `Name = ${nameInput.value}   Email = ${emailInput.value}.`       
+            ));
+            userlist.appendChild(li);
+           }
+           var my_obj = {
+             "Name" : nameInput.value,
+             "Email" : emailInput.value
+           };
+          var myObj_serialized = JSON.stringify(my_obj);   
+        localStorage.setItem('myObj', myObj_serialized);
+        nameInput.value = '';
+        emailInput.value = '';
+        };
+
+    </script>
+</body>
+</html>
