@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details of users</title>
+  </head>
+
+  <body>
+    <form action="" id="my_form" onsubmit="addTOLocalstorage(event)">
+      <h1>Appointment Booking App</h1>
+      <input type="text" id="username" name="username" required />
+      <input type="email" id="email" name="emailId" required />
+      <input type="submit" id="submit" value="submit" />
+      <ol id="userlist"></ol>
+    </form>
+    <script>
+      function addTOLocalstorage(event) {
+        event.preventDefault();
+        var name = event.target.username.value;
+        var email = event.target.emailId.value;
+        let obj = {
+          name,
+          email,
+        };
+
+        localStorage.setItem(obj.email, JSON.stringify(obj));
+        showNewuserToScreen(obj);
+      }
+      function showNewuserToScreen(user) {
+        var Name = document.getElementById("username");
+        var Email = document.getElementById("email");
+        var parentNode = document.querySelector("#userlist");
+        var childHTML = `<li id='${user.email}' > Name of User = ${user.name }  <br> Email of User = ${user.email} <button onclick=editUserDetail('${user.email}','${user.name}')>  Edit  </button>   <button onclick=deleteUser('${user.email}')>  Delete </button> </li> `;
+        parentNode.innerHTML = parentNode.innerHTML + childHTML;
+        Name.value = "";
+        Email.value = "";
+      }
+      function editUserDetail(emailId, name) {
+        document.getElementById('email').value = emailId;
+        document.getElementById('username').value = name;
+        deleteUser(emailId);
+      }
+      function deleteUser(emailId) {
+        localStorage.removeItem(emailId);
+        removeUserfromScreen(emailId);
+      }
+      function removeUserfromScreen(emailId) {
+        var parent = document.getElementById("userlist");
+        var childTodeleted = document.getElementById(emailId);
+        parent.removeChild(childTodeleted);
+        if(childTodeleted) {
+                    parent.removeChild(childTodeleted);
+                }
+      }
+
+      
+    </script>
+  </body>
+</html>
