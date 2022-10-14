@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //---*** this inside global scope***///
+    'use strict'
+ 
+ this.table = "window table";
+console.log(window.table);
+ this.garage = {
+    table : 'Garag table'
+ }
+ //console.log(this.garage.table);
+  
+
+ //----*** this inside an object ****//
+
+ 
+ let ramsTable = {
+    table : "Ram's Table"
+ }
+  
+
+// console.log(this.ramsTable.table)  getting error because ramstable is not in globle
+//console.log(ramsTable.table);
+
+
+
+//----**** This inside a method****---//
+
+
+let shyamTable = {
+    table : "Shyam's Table",
+    cleaning(){
+        console.log(`Cleaning ${this.table}`);
+    }
+ }
+ this.garage2 = {
+    table : 'Garag table',
+    cleaning(){
+        console.log(`Cleaning ${this.table}`);
+    }
+ }
+ //shyamTable.cleaning();
+ //garage2.cleaning();
+
+
+
+ //----***This inside a function****----//
+
+ 
+ this.table = 'window table'
+ const garage3 = function(soap){
+    console.log(`Cleaning ${this.table} using ${soap}` );
+ }
+ //garage3();    TypeError: Cannot read properties of undefined 
+                   // call() function to rescue
+    //garage3.call(this, 'some soap');
+ 
+
+ //---***This inside a inner function***---//
+ 
+
+ this.table = 'Window Table';
+ const garage4 = function(soap){
+    const innerFunction = function(_soap){
+        console.log(`Cleaning ${this.table} using ${_soap}` );
+    }
+    innerFunction.call(this, soap);
+    innerFunction.bind(this)(soap);
+ }
+//garage4.call(this, 'some saop');
+
+
+//  OR
+
+ this.table = 'Window Table';
+ const garage5 = function(soap){
+    const innerFunction = () => {
+        console.log(`Cleaning ${this.table} using ${soap}` );
+    }
+    innerFunction.call(soap);
+ }
+//garage5.call(this, 'some saop');
+
+// This inside a consrtuctor
+
+let createRoom = function(name){
+    this.table = `${name}s table`
+}
+const geetaTable = new createRoom('Geeta');
+const ramTable = new createRoom('Ram');
+
+//garage5.call(geetaTable, 'some soap');
+//garage5.call(ramTable, 'some soap');
+
+
+// ---*This inside a Class**--//
+const garage6 = function(soap){
+    console.log(`Cleaning ${this.table} using ${soap}` );
+ }
+class createRoom2 {
+  constructor(name){
+    this.table = `${name}s table` 
+  }
+  cleaningTable(soap){
+    console.log(`Cleaning ${this.table} using ${soap}` );
+    }
+}
+const geetaTable2 = new createRoom('Geeta');
+const ramTable2 = new createRoom('Ram');
+
+garage6.call(geetaTable2, 'some soap');
+garage6.call(ramTable2, 'some soap');
+
+    </script>
+</body>
+</html>
