@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+ <link rel="stylesheet" href="20style.css">
+<body>
+    <form id="expAdd"  onsubmit="addTOLocalstorage(event)" >
+        <div id="header"> 
+            <h1>Expense Tracker</h1>
+            <label for="">Expense Amount :</label>
+            <input type="number" placeholder="Enter amount" name="amount" id="amt" required >
+            <label for="">Description :</label>
+            <input type="text" name="description" id="desc" required>
+            <label for="">Choose a Category :</label>
+            <select id="Catry">
+                <option value="movie">Movie</option>
+                <option value="shopping">Shopping</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="travel">Travel</option>
+                <option value="other">Other</option>
+            </select>
+            <input type="submit" id="btn1" value="Add Expense">  
+        </div>
+        <table class="content-table" >
+         <thead>
+            <tr>
+                <th>Amount(in &#x20b9)</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="adExp">
+        
+        </tbody>
+        </table>
+        </div>
+    </form>
+
+    <script src="20main.js"></script>
+</body>
+</html>

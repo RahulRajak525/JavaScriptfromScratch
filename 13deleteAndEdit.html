@@ -10,8 +10,10 @@
   <body>
     <form action="" id="my_form" onsubmit="addTOLocalstorage(event)">
       <h1>Appointment Booking App</h1>
+      <label for="">Enter Name :</label>
       <input type="text" id="username" name="username" required />
-      <input type="email" id="email" name="emailId" required />
+      <label for="">Enter Email :</label>
+      <input type="email" id="email" name="emailid" required />
       <input type="submit" id="submit" value="submit" />
       <ol id="userlist"></ol>
     </form>
@@ -19,7 +21,7 @@
       function addTOLocalstorage(event) {
         event.preventDefault();
         var name = event.target.username.value;
-        var email = event.target.emailId.value;
+        var email = event.target.emailid.value;
         let obj = {
           name,
           email,
@@ -38,8 +40,8 @@
         Email.value = "";
       }
       function editUserDetail(emailId, name) {
-        document.getElementById('email').value = emailId;
-        document.getElementById('username').value = name;
+        document.getElementById("email").value = emailId;
+        document.getElementById("username").value = name;
         deleteUser(emailId);
       }
       function deleteUser(emailId) {
@@ -47,12 +49,12 @@
         removeUserfromScreen(emailId);
       }
       function removeUserfromScreen(emailId) {
-        var parent = document.getElementById("userlist");
+        var parent = document.getElementById('userlist');
         var childTodeleted = document.getElementById(emailId);
         parent.removeChild(childTodeleted);
-        if(childTodeleted) {
-                    parent.removeChild(childTodeleted);
-                }
+        if (childTodeleted) {
+          parent.removeChild(childTodeleted);
+        }
       }
 
       
