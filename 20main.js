@@ -28,7 +28,6 @@ function addTOLocalstorage(event) {
     descr.value = "";
  }
  function editExp(Description,Amount, Category ){
-    // console.log('kjfv');
     document.getElementById('desc').value = Description;
     document.getElementById('amt').value = Amount;
     document.getElementById('Catry').value = Category;
@@ -37,18 +36,14 @@ function addTOLocalstorage(event) {
  }
 
  function deletexp(Description){
-    console.log(Description);
     localStorage.removeItem(Description);
-    console.log('lshg');
     removeExpences(Description);
       
  }
 
  function removeExpences(Description){
     const parentNode = document.getElementById('adExp');
-    console.log(parentNode);
     const childToDeleted = document.getElementById(Description);
-    console.log(childToDeleted);
     parentNode.removeChild(childToDeleted);
     if(childToDeleted){
         parentNode.removeChild(childToDeleted);
