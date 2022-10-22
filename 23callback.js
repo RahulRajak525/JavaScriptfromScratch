@@ -12,7 +12,7 @@ function getPosts(){
       posts.forEach((post, index, createdAt)=> {
         output += `<li>  Post ${index+1} created ${Math.floor((Date.now()- post.createdAt)/1000)} seconds ago </li>`;
       });
-      document.body.innerHTML = output;
+      document.getElementById('post').innerHTML = output;
     }, 1000);    
     
 }
