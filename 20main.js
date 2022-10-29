@@ -15,17 +15,17 @@ function addTOLocalstorage(event) {
     localStorage.setItem(exp.Description, JSON.stringify(exp));
     showNewuserToScreen(exp);
   }
+
+
+
  function showNewuserToScreen(user){
-    const cat = document.getElementById('Catry');
-    const amtn = document.getElementById('amt');
-    const descr = document.getElementById('desc');
+    document.getElementById('Catry').value = "";
+    document.getElementById('amt').value = "";
+    document.getElementById('desc').value = "";
     
     const parent = document.querySelector('#adExp');
-    const childElement = `<tr id='${user.Description}'> <td> &#x20b9 ${user.Amount}</td> <td> ${user.Category}</td> <td>${user.Description}</td>   <td><button onclick = deletexp('${user.Description}') >Delete Expence</button></td> <td><button onclick = editExp('${user.Description}','${user.Amount}','${user.Category}') > Edit Expence </button></td> </tr> `;
+    const childElement = `<tr id='${user.Description}'> <td> &#x20b9 ${user.Amount}</td> <td> ${user.Category}</td> <td>${user.Description}</td>   <td><button onclick = "deletexp('${user.Description}')">Delete Expence</button></td> <td><button onclick ="editExp('${user.Description}','${user.Amount}','${user.Category}')" > Edit Expence </button></td> </tr> `;
     parent.innerHTML = parent.innerHTML + childElement;
-    cat.value = "";
-    amtn.value = "";
-    descr.value = "";
  }
  function editExp(Description,Amount, Category ){
     document.getElementById('desc').value = Description;
