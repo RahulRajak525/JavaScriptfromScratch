@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Details of users</title>
+  </head>
+
+  <body>
+    <form action="" id="my_form" onsubmit="addTOLocalstorage(event)">
+      <h1>Appointment Booking App</h1>
+      <label for="">Enter Name :</label>
+      <input type="text" id="username" name="username" required />
+      <label for="">Enter Email :</label>
+      <input type="email" id="email" name="emailId" required />
+      <input type="submit" id="submit" value="submit" />
+    </form>
+    <ul id="userlist"></ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"></script>
+    
+    <script>
+      function addTOLocalstorage(event) {
+        event.preventDefault();
+        var name = event.target.username.value;
+        var email = event.target.emailId.value;
+        let obj = {
+          name,
+          email,
+        }
+       axios.post("https://crudcrud.com/api/72d99cb142c045e69bb9a79f73fd0c99/GetUserDetail", obj)
+       .then((response) => {
+        showNewuserToScreen(response.data);
+        console.log(response);
+       }).catch((err) => {
+          console.log(err);
+       });
+        
+      }
+      window.addEventListener("DOMContentLoaded", () => {
+        const localStorageObj = localStorage;
+        const localStorageKeys = Object.keys(localStorageObj);
+        for(var i= 0; i<localStorageKeys.length; i++){
+          const key = localStorageKeys[i];
+          const userDetailsString = localStorageObj[key];
+          const userDetailsObj = JSON.parse(userDetailsString);
+          showNewuserToScreen(userDetailsObj);
+        }
+      })
+
+      function showNewuserToScreen(user) {
+        var parentNode = document.getElementById("userlist");
+        var childHTML = `<li id='${user.email}' > Name of User = ${user.name} <br> Email of User = ${user.email} <button onclick= "editUserDetail('${user.email}','${user.name}')">  Edit  </button>   <button onclick="deleteUser('${user.email}')">  Delete </button> </li> `;
+        parentNode.innerHTML = parentNode.innerHTML + childHTML;
+        document.getElementById("username").value = "";
+        document.getElementById("email").value = "";
+      }
+      function editUserDetail(emailId, name){
+        document.getElementById("email").value = emailId;
+        document.getElementById("username").value = name;
+        deleteUser(emailId);
+      }
+      function deleteUser(emailId) {
+        localStorage.removeItem(emailId);
+        removeUserfromScreen(emailId);
+      }
+      function removeUserfromScreen(emailId) {
+        var parent = document.getElementById('userlist');
+        var childTodeleted = document.getElementById(emailId);
+        if (childTodeleted) {
+          parent.removeChild(childTodeleted);
+        }
+      }  
+    </script>
+  </body>
+</html>
