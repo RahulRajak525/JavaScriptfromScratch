@@ -13,33 +13,42 @@
       <label for="">Enter Name :</label>
       <input type="text" id="username" name="username" required />
       <label for="">Enter Email :</label>
-      <input type="email" id="email" name="emailid" required />
+      <input type="email" id="email" name="emailId" required />
       <input type="submit" id="submit" value="submit" />
-      <ol id="userlist"></ol>
     </form>
+    <ul id="userlist"></ul>
+    
     <script>
       function addTOLocalstorage(event) {
         event.preventDefault();
         var name = event.target.username.value;
-        var email = event.target.emailid.value;
+        var email = event.target.emailId.value;
         let obj = {
           name,
           email,
-        };
-
+        }
         localStorage.setItem(obj.email, JSON.stringify(obj));
         showNewuserToScreen(obj);
       }
+      window.addEventListener("DOMContentLoaded", () => {
+        const localStorageObj = localStorage;
+        const localStorageKeys = Object.keys(localStorageObj);
+        for(var i= 0; i<localStorageKeys.length; i++){
+          const key = localStorageKeys[i];
+          const userDetailsString = localStorageObj[key];
+          const userDetailsObj = JSON.parse(userDetailsString);
+          showNewuserToScreen(userDetailsObj);
+        }
+      })
+
       function showNewuserToScreen(user) {
-        var Name = document.getElementById("username");
-        var Email = document.getElementById("email");
-        var parentNode = document.querySelector("#userlist");
-        var childHTML = `<li id='${user.email}' > Name of User = ${user.name }  <br> Email of User = ${user.email} <button onclick=editUserDetail('${user.email}','${user.name}')>  Edit  </button>   <button onclick=deleteUser('${user.email}')>  Delete </button> </li> `;
+        document.getElementById("username").value = "";
+        document.getElementById("email").value = "";
+        var parentNode = document.getElementById("userlist");
+        var childHTML = `<li id='${user.email}' > Name of User = ${user.name}<br> Email of User = ${user.email} <button onclick="editUserDetail('${user.email}','${user.name}')">  Edit  </button>   <button onclick="deleteUser('${user.email}')">  Delete </button> </li> `;
         parentNode.innerHTML = parentNode.innerHTML + childHTML;
-        Name.value = "";
-        Email.value = "";
       }
-      function editUserDetail(emailId, name) {
+      function editUserDetail(emailId, name){
         document.getElementById("email").value = emailId;
         document.getElementById("username").value = name;
         deleteUser(emailId);
@@ -51,13 +60,10 @@
       function removeUserfromScreen(emailId) {
         var parent = document.getElementById('userlist');
         var childTodeleted = document.getElementById(emailId);
-        parent.removeChild(childTodeleted);
         if (childTodeleted) {
           parent.removeChild(childTodeleted);
         }
-      }
-
-      
+      }  
     </script>
   </body>
 </html>
