@@ -49,9 +49,13 @@
     li.appendChild(document.createTextNode(newItem.value));
     items.appendChild(li);
     var deletBtn = document.createElement('button');
+    var editBtn = document.createElement('button');
         deletBtn.className='btn btn-danger btn-sm float-right delete';
+        editBtn.className='btn btn-success float-right ';
         deletBtn.appendChild(document.createTextNode('X'));
+        editBtn.appendChild(document.createTextNode('edit'));
         li.appendChild(deletBtn);
+        li.appendChild(editBtn);
         newItem.value='';
   }       
 }
