@@ -6,6 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Details of users</title>
   </head>
+  <style>
+    form{
+      background-color: #a2afb9;
+      width: 50%;
+      padding-bottom: 15px;
+    }
+    input{
+      background-color:#b5d3d5;
+      border-radius: 5px;
+    }
+   ul li:nth-of-type(odd){
+      background-color: #f3f3f3;
+      width: 47%;
+      height: 48px;
+      padding-left: 10px;
+    }
+     li:nth-of-type(even){
+      background-color: white;
+      width: 47%;
+      height: 48px;
+      padding-left: 10px;
+    }
+    button{
+      float: right;
+      margin-right: 5px;
+      background-color: #beafaf;
+      border-radius: 5px;
+      color: rgb(20, 14, 3);
+    }
+  </style>
 
   <body>
     <form action="" id="my_form" onsubmit="addTOLocalstorage(event)">
@@ -14,7 +44,7 @@
       <input type="text" id="username" name="username" required />
       <label for="">Enter Email :</label>
       <input type="email" id="email" name="emailId" required />
-      <input type="submit" id="submit" value="submit" />
+      <input type="submit" id="submit" class="btn btn-primary" value="submit" />
     </form>
     <ul id="userlist"></ul>
 
@@ -29,7 +59,7 @@
           name,
           email
         }
-       axios.post("https://crudcrud.com/api/d691210434b8422788186c79a542a1f6/GetUserDetail", obj)
+       axios.post("https://crudcrud.com/api/adb1f70443be4d02a1a8e7c32a01412c/GetUserDetail", obj)
        .then((response) => {
         showNewuserToScreen(response.data);
        }).catch((err) => {
@@ -38,7 +68,7 @@
         
       }
       window.addEventListener("DOMContentLoaded", () => {
-          axios.get("https://crudcrud.com/api/d691210434b8422788186c79a542a1f6/GetUserDetail")
+          axios.get("https://crudcrud.com/api/adb1f70443be4d02a1a8e7c32a01412c/GetUserDetail")
           .then((response)=>{
              for(var i =0; i<response.data.length; i++){
               showNewuserToScreen(response.data[i]);
@@ -50,7 +80,7 @@
 
       function showNewuserToScreen(user) {
         var parentNode = document.getElementById("userlist");
-        var childHTML = `<li id='${user._id}' > Name of User = ${user.name} <br> Email of User = ${user.email} <button onclick= "editUserDetail('${user.email}','${user.name}','${user._id}' )">  Edit  </button>   <button onclick="deleteUser('${user._id}')">  Delete </button> </li> `;
+        var childHTML = `<li id='${user._id}' > Name of User - ${user.name} <br> Email of User - ${user.email} <button onclick= "editUserDetail('${user.email}','${user.name}','${user._id}')" type="button" class="btn btn-primary" >  Edit  </button>   <button onclick="deleteUser('${user._id}')" type="button" class="btn btn-success">  Delete </button> </li> `;
         parentNode.innerHTML = parentNode.innerHTML + childHTML;
         document.getElementById("username").value = "";
         document.getElementById("email").value = "";
@@ -62,7 +92,7 @@
         deleteUser(userId);
       }
       function deleteUser(userId) {
-        axios.delete(`https://crudcrud.com/api/d691210434b8422788186c79a542a1f6/GetUserDetail/${userId}`)
+        axios.delete(`https://crudcrud.com/api/adb1f70443be4d02a1a8e7c32a01412c/GetUserDetail/${userId}`)
         .then((response)=>{
           removeUserfromScreen(userId);
         })
