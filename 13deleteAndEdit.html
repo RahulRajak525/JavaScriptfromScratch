@@ -6,17 +6,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Details of users</title>
   </head>
-
+   <style>
+    
+    form{
+      background-color: #a2afb9;
+      width: 50%;
+      padding-bottom: 15px;
+    }
+    input{
+      background-color:#b5d3d5;
+      border-radius: 5px;
+    }
+    body .list ul li:nth-of-type(odd){
+      background-color: #f3f3f3;
+      width: 47%;
+      height: 48px;
+      padding-left: 10px;
+    }
+     li:nth-of-type(even){
+      background-color: white;
+      width: 47%;
+      height: 48px;
+      padding-left: 10px;
+    }
+    button{
+      float: right;
+      margin-right: 5px;
+      background-color: #9c9898;
+      border-radius: 5px;
+    }
+   </style>
   <body>
+    
     <form action="" id="my_form" onsubmit="addTOLocalstorage(event)">
-      <h1>Appointment Booking App</h1>
+      <header id="main-header" class="bg-success text-white p-4 mb-3">
+        <h1>Appointment Booking App</h1>
+      </header> 
       <label for="">Enter Name :</label>
       <input type="text" id="username" name="username" required />
       <label for="">Enter Email :</label>
       <input type="email" id="email" name="emailId" required />
-      <input type="submit" id="submit" value="submit" />
+      <input type="submit" id="submit" value="submit" /> 
+      
     </form>
-    <ul id="userlist"></ul>
+  <div class="list">
+      <ul id="userlist"> </ul>
+  </div>
+    
+    
     
     <script>
       function addTOLocalstorage(event) {
@@ -45,7 +82,7 @@
         document.getElementById("username").value = "";
         document.getElementById("email").value = "";
         var parentNode = document.getElementById("userlist");
-        var childHTML = `<li id='${user.email}' > Name of User = ${user.name}<br> Email of User = ${user.email} <button onclick="editUserDetail('${user.email}','${user.name}')">  Edit  </button>   <button onclick="deleteUser('${user.email}')">  Delete </button> </li> `;
+        var childHTML = `<li id='${user.email}' > Name of User = ${user.name}<br> Email of User = ${user.email} <button onclick="editUserDetail('${user.email}','${user.name}')" class="btn btn-danger btn-sm float-right">  Edit</button>  <button onclick="deleteUser('${user.email}')" class="btn btn-danger btn-sm float-right" >  Delete </button> </li> `;
         parentNode.innerHTML = parentNode.innerHTML + childHTML;
       }
       function editUserDetail(emailId, name){
